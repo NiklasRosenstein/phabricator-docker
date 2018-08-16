@@ -4,9 +4,10 @@ services:
     build:
       context: .
       args:
-        - BASE_URI=https://phab.example.com
-        - REPO_PATH=/var/repo
-        - TIMEZONE=Europe/Berlin
+        - PHAB_BASE_URI=https://phab.example.com
+        - PHAB_REPO_PATH=/var/repo
+        - PHAB_TIMEZONE=Europe/Berlin
+        - PHP_POST_MAX_SIZE=32MB
     ports:
       - "127.0.0.1:8012:80"
     volumes:

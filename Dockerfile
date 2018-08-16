@@ -18,19 +18,21 @@ COPY support-files/preamble.php support/preamble.php
 RUN php -l support/preamble.php
 
 # Configure Phabricator.
-ARG BASE_URI
-ARG REPO_PATH
-ARG TIMEZONE
-RUN bin/config set phabricator.base-uri $BASE_URI
-RUN bin/config set phabricator.timezone $TIMEZONE
-RUN bin/config set repository.default-local-path $REPO_PATH
+ARG PHAB_BASE_URI
+ARG PHAB_REPO_PATH
+ARG PHAB_TIMEZONE
+RUN bin/config set phabricator.base-uri $PHAB_BASE_URI
+RUN bin/config set phabricator.timezone $PHAB_TIMEZONE
+RUN bin/config set repository.default-local-path $PHAB_REPO_PATH
+RUN bin/config set pygments.enabled true
 
 # Configure PHP
+ARG PHP_POST_MAX_SIZE
 RUN echo 'always_populate_raw_post_data=-1' >> /etc/php5/apache2/php.ini
+RUN echo 'post_max_size=$PHP_POST_MAX_SIZE' >> /etc/php5/apache2/php.ini
 
 # Configure MySQL
-COPY support-files/mysql.conf /etc/mysql/conf.d/phabricator-mysql.conf
-RUN cat /etc/mysql/conf.d/phabricator-mysql.conf
+COPY support-files/mysql.cnf /etc/mysql/conf.d/phabricator-mysql.cnf
 
 # Create a pygmentize binary (does not come with the package).
 COPY support-files/pygmentize /bin/pygmentize
