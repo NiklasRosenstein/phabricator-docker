@@ -27,6 +27,7 @@ RUN bin/config set phabricator.timezone $PHAB_TIMEZONE
 RUN bin/config set repository.default-local-path $PHAB_REPO_PATH
 RUN bin/config set storage.local-disk.path $PHAB_STORAGE_PATH
 RUN bin/config set pygments.enabled true
+RUN chown www-data:www-data -R $PHAB_STORAGE_PATH
 
 # Configure PHP
 ARG PHP_POST_MAX_SIZE
