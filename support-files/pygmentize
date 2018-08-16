@@ -1,0 +1,4 @@
+#!/bin/bash
+python3 -c 'from pygments.cmdline import main; import sys; sys.exit(main())'
+exit $?
+

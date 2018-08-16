@@ -1,0 +1,14 @@
+version: '3'
+services:
+  phab:
+    build:
+      context: .
+      args:
+        - BASE_URI=https://phab.example.com
+        - REPO_PATH=/var/repo
+        - TIMEZONE=Europe/Berlin
+    ports:
+      - "127.0.0.1:8012:80"
+    volumes:
+      - ./.data/repos:/var/repo
+      - ./.data/mysql:/var/lib/mysql/
