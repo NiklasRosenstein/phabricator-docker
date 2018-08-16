@@ -6,10 +6,12 @@ services:
       args:
         - PHAB_BASE_URI=https://phab.example.com
         - PHAB_REPO_PATH=/var/repo
+        - PHAB_STORAGE_PATH=/var/storage
         - PHAB_TIMEZONE=Europe/Berlin
-        - PHP_POST_MAX_SIZE=32MB
+        - PHP_POST_MAX_SIZE=512MB
     ports:
       - "127.0.0.1:8012:80"
     volumes:
       - ./.data/repos:/var/repo
+      - ./.data/storage:/var/storage
       - ./.data/mysql:/var/lib/mysql/

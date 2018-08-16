@@ -20,10 +20,12 @@ RUN php -l support/preamble.php
 # Configure Phabricator.
 ARG PHAB_BASE_URI
 ARG PHAB_REPO_PATH
+ARG PHAB_STORAGE_PATH
 ARG PHAB_TIMEZONE
 RUN bin/config set phabricator.base-uri $PHAB_BASE_URI
 RUN bin/config set phabricator.timezone $PHAB_TIMEZONE
 RUN bin/config set repository.default-local-path $PHAB_REPO_PATH
+RUN bin/config set storage.local-disk.path $PHAB_STORAGE_PATH
 RUN bin/config set pygments.enabled true
 
 # Configure PHP
